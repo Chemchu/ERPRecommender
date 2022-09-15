@@ -14,7 +14,7 @@ def get_recommendation():
         data = request.json
         respuesta = Recomendar(association_result=association_results_categorias,
                                categorias_carrito=data["categoriasEnCarrito"], confidence_min=0.2, lift_min=1.2)
-        return {"recomendacion": respuesta}
+        return {"data": respuesta}
 
     except:
-        return {"recomendacion": ""}
+        return {"data": ""}
