@@ -1,9 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 
 from train import CalcularFP, Init, Recomendar
 
 app = Flask(__name__)
-
 
 association_results_categorias = CalcularFP(
     dataset=Init(), min_supp=0.02)
