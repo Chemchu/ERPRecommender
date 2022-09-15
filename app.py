@@ -11,11 +11,11 @@ association_results_categorias = CalcularFP(
 
 @app.route("/", methods=['GET', 'POST'])
 def get_recommendation():
-    data = request.json
-    print(data)
+    try:
+        data = request.json
+        respuesta = Recomendar(association_result=association_results_categorias,
+                               categorias_carrito=data["categoriasEnCarrito"], confidence_min=0.2, lift_min=1.2)
+        return {"recomendacion": respuesta}
 
-    # dataJson = jsonify(data)
-
-    respuesta = Recomendar(association_result=association_results_categorias, categorias_carrito=[
-        "NEVERA", "DROGUERIA", "BEBIDAS"], confidence_min=0.2, lift_min=1.2)
-    return respuesta
+    except:
+        return {"recomendacion": ""}
