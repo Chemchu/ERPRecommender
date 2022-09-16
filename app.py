@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from train import CalcularFP, Init, Recomendar
 
@@ -14,7 +14,11 @@ def get_recommendation():
         data = request.json
         respuesta = Recomendar(association_result=association_results_categorias,
                                categorias_carrito=data["categoriasEnCarrito"], confidence_min=0.2, lift_min=1.2)
-        return {"data": respuesta}
+
+        if respuesta == None:
+            return jsonify({"data": "INVALID"})
+        else:
+            return jsonify({"data": respuesta})
 
     except:
-        return {"data": ""}
+        return jsonify({"data": "INVALID"})
